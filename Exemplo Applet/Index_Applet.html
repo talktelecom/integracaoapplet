@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+
+    <head onunload="parent.header.document.JTalkAtendimento.setLogoff();">
+
+            <title>ATENDIMENTO    N_E_T</title>
+
+            <script src="MetodoEnvio.js" type="text/javascript"></script>
+			<script src="MetodoRetorno.js" type="text/javascript"></script>
+			<script src="ScriptDePagina.js" type="text/javascript"></script>
+			<script language="JavaScript" for="window" event="onunload">
+				//alert('EFETUANDO LOGOFF...');
+				document.getElementById("JTalkAtendimento").setLogoff();
+			</script>
+			<link href="styleApplet.css" rel="stylesheet" type="text/css" />
+  <!-- Este código é necessário para prevenir que o usuário volte a página anterior. -->
+			<script> javascript:window.history.forward(1);</script>
+
+    </head>
+
+<body onload="javascript:loadHeader();" onunload="javascript:winClose();" background= "./fundo_tela.jpg">
+
+<!--<button onclick="javascript:loadHeader()">Versão Applet</button>-->
+
+<form id="Atendimento" name="Atendimento">
+	<CENTER>
+
+			<TABLE id="TableGeral">
+				<TR>
+					<TD>
+						<TABLE id="TableLogin"style="border-bottom:1px solid;border-left:1px solid;border-right:1px solid;border-top:1px solid; border-color:#000;">
+									<TR>
+											<TD id="lblRamal" class="sLogin" id="lblRamal">Ramal:</TD>
+											<TD style="text-align:right;"><INPUT TYPE="text" STYLE="WIDTH: 75px; HEIGHT: 17px" NAME="txtRamal" id="txtRamal"></TD>
+											<TD id="lblRamal" class="sLogin" id="lblIp">IP Maquina:</TD>
+											<TD style="text-align:right;"><INPUT TYPE="text" STYLE="WIDTH: 75px; HEIGHT: 17px" NAME="txtIpMaq" id="txtIpMaq"></TD>
+									</TR>
+									<TR>
+											<TD class="sLogin" id="lblId">Id:</TD>
+											<TD style="text-align:right;"><INPUT TYPE="text" STYLE="WIDTH: 75px; HEIGHT: 17px" NAME="txtId" id="txtId"></TD>
+											<TD id="lblRamal" class="sLogin" id="lblPorta">Porta:</TD>
+											<TD style="text-align:right;"><INPUT TYPE="text" STYLE="WIDTH: 75px; HEIGHT: 17px" NAME="txtPorta" id="txtPorta"></TD>
+									</TR>
+									<TR>
+											<TD class="sLogin" id="lblSenha">Senha:</TD>
+											<TD style="text-align:right;"><INPUT TYPE="password" STYLE="WIDTH: 75px; HEIGHT: 17px" NAME="txtSenha" id="txtSenha"></TD>
+											<TD rowspan="4" colspan="2" style="text-align:center; width: 73px"><a class="dcontexto"><INPUT TYPE="button" class="BotaoAzul dcontexto" id="btnLogin" ONCLICK="method_login()" VALUE="LogIn">
+																			<span>Verifica conexão com o CTI JTalkAtendimento.setConnectCTI(ip,porta) e retorna true / false;
+											<br /> JTalkAtendimento.setLogin(RAMAL, ID , SENHA, TIPO DE INTERVALO);</span></a></TD>
+									</TR>
+						</TABLE>
+					</TD>
+					<TD>
+						<TABLE id="TabelaDicar" bordercolor="#000000" style="visibility:hidden; border:1px solid;">
+								<TR>
+									<TD class="sLogin">Ramal/Número:</TD>
+									<TD style="width: 112px"><a href="#" class="dcontexto"><input type="button" class="BotaoAzul dcontexto" id="btnDiscar" onClick="method_discar()" value="Discar"><span>Retorno da rota = document.getElementById("JTalkAtendimento").str_rotadefault;
+		<br /> document.getElementById("JTalkAtendimento").setTiradaFila();
+		<br /> document.getElementById("JTalkAtendimento").setLiberaPausa();
+		<br /> document.getElementById("JTalkAtendimento").setDiscar(0 para ramal ou 1 para externo ,Número ,Rota para externo)
+		</span></a></TD>
+								</TR>
+								<TR>
+									<TD style="width: 112px"><input type="text" style="WIDTH: 112px; HEIGHT: 17px" name="txtFone" id="txtFone"></TD>
+									<TD style="width: 112px"><a href="#" class="dcontexto"><input type="button" class="BotaoAzul dcontexto" id="btnCancelarDiscagem" onClick="method_PoeNaFila()" value="Cancelar Discagem"><span>getElementById("JTalkAtendimento").setPoeNaFila() Coloca chamada na fila</span></a></TD>
+								</TR>
+								<TR>
+									<TD style="width:20px;"><a href="#" class="dcontexto"><input type="button" class="BotaoAzul dcontexto" id="btnCapturar" style="WIDTH: 122px;" onClick="method_captura_ramal()" value="Capturar"><span>getElementById("JTalkAtendimento").setCapturaChamada(); para capturar chamada de outro ramal</span></a></TD>
+									<TD style="width: 112px"><a href="#" class="dcontexto"><input type="button" class="BotaoAzul dcontexto" id="btnDesligar" onClick="method_desliga_cliente()" value="Desligar"><span>getElementById("JTalkAtendimento").setDesligaCliente(); para desligar chamada</span></a></TD>
+								</TR>
+						</TABLE>
+					</TD>
+					<TD>
+						<TABLE id="TableConsulta" bordercolor="#000000" style="visibility:hidden; border:1px solid;">
+									<TR>
+										<TD class="sLogin">Consultar</TD>
+										<TD style="width: 112px"><a href="#" class="dcontexto"><INPUT TYPE="button" class="BotaoAzul dcontexto" id="btnConsultar" ONCLICK="method_Consultar()" VALUE="Consultar"><span>document.getElementById("JTalkAtendimento").setPoeEspera(); coloca chamada em espera
+<br />getElementById("JTalkAtendimento").setConsulta([0 para RAMAL e 1 para Externo] ,[Número para conferir],[se Externo então = Rota se ramal '']);</span></a></TD>
+									</TR>
+									<TR>
+										<TD><INPUT TYPE="text" STYLE="WIDTH: 112px; HEIGHT: 17px" NAME="txtTransFone" id="txtTransFone"></TD>
+										<TD><a href="#" class="dcontexto"><INPUT TYPE="button" class="BotaoAzul dcontexto" id="btnCancelarConculta" ONCLICK="method_CancelaConsulta()" VALUE="Cancelar Consulta"><span>document.getElementById("JTalkAtendimento").setLiberaConsulta(); Libera Consulta
+<br />document.getElementById("JTalkAtendimento").setTiraEspera(); Retira Chamada em espera</span></a></TD>
+									</TR>
+									<TR>
+										<TD style="width:20px;">&nbsp;</TD>
+										<TD style="width:20px;"><a href="#" class="dcontexto"><input type="button" class="BotaoAzul dcontexto" id="btnTransferencia" style="WIDTH: 134px;" onClick="method_transferencia()" value="Transferir"><span>	getElementById("JTalkAtendimento").setTransferencia([0 para RAMAL e 1 para Externo] ,[Número para Transferencia] , [se Externo então = Rota se ramal '']);</span></a></TD>
+									</TR>
+						</TABLE>
+					</TD>
+					<TD>
+						<TABLE id="TableDialogos" bordercolor="#000000" style="visibility:hidden; border:1px solid;">
+								<TR>
+									  <TD class="sLogin">Carrega Arquivos</TD>
+									  <TD style="width:20px;"><a href="#" class="dcontexto"><input type="button" class="BotaoAzul dcontexto" id="btnRecados" style="WIDTH: 122px;" onClick="method_Recados()" value="Recados"><span>getElementById("JTalkAtendimento").setAlocaVoxRecado(); Método para pedir recados.</span></a></TD>
+									  <TD style="width:20px;"><a href="#" class="dcontexto"><input type="button" class="BotaoAzul dcontexto" id="btnCancelaRecado" style="WIDTH: 122px;" onClick="method_CancelaAlocaVoxRecado()" value="Cancela Recado"><span>getElementById("JTalkAtendimento").setCancelaAlocaVoxRecado(); Método que cancela o AlocaVoxRecado.</span></a></TD>
+								</TR>
+								<TR>
+									<TD class="sLogin">Nome do Arquivo</TD>
+									<TD style="width:20px;" colspan="2"><input type="text" style="WIDTH: 246px; HEIGHT: 17px" name="txtRecado" id="txtRecado"></TD>
+								</TR>
+								<TR>
+									<TD style="width:20px;"><a class="dcontexto"><input type="button" class="BotaoAzul dcontexto" id="btnOuvirDialogo" style="WIDTH: 122px;" onClick="method_ouvirdialogo()" value="Ouvir Dialogo"><span>
+getElementById("JTalkAtendimento").setPlayVox([Nome do Arquivo]);</span></a></TD>
+									<TD style="width:20px;"><a href="#" class="dcontexto"><input type="button" class="BotaoAzul dcontexto" id="btnOuvirRecado" style="WIDTH: 122px;" onClick="method_ouvirrecado()" value="Ouvir Recado"><span>getElementById("JTalkAtendimento").setPlayVox([Nome do Arquivo]);</span></a></TD>
+									<TD style="width:20px;"><a href="#" class="dcontexto"><input type="button" class="BotaoAzul dcontexto" id="btnCopiaVox" style="WIDTH: 122px;" onClick="method_CopiaVox()" value="CopiaVox"><span>getElementById("JTalkAtendimento").setCopiaVox([Ramal logado],[caminho ex. 'c:\\talk'], [Nome do Arquivo])<br />Solicita copia de aquivo .vox para pasta na rede.</span></a></TD>
+								</TR>
+						</TABLE>
+					</TD>
+				</TR>
+
+			</TABLE>
+
+			<TABLE>
+				<TR>
+					<TD>
+					&nbsp;<TABLE id="TableStatusInter" style="visibility:hidden; border-bottom:1px solid;border-left:1px solid;border-right:1px solid;border-top:1px solid; border-color:#000;">
+							<TR>
+								<TD class="sLogin"> Fila:</TD>
+								<TD style="padding-left:21px"><input name="txtFila" type="text" id="txtFila" style="WIDTH: 75px; HEIGHT: 17px"></TD>
+								<TD class="sLogin" colspan="2">Tipos de Intervalos</TD>
+								<TD style="width:20px; padding-left:36px;"><a href="#" class="dcontexto"><INPUT TYPE="button" class="BotaoAzul" id="btnIntervalo" STYLE="WIDTH: 122px;" ONCLICK="method_intervalo()" VALUE="Intervalo"><span>
+para entrar em intervalo<br />getElementById("JTalkAtendimento").setEntrarIntervaloGrupoDialer();<br /> para sair de Intervalo <br /> getElementById("JTalkAtendimento").setSairIntervaloGrupoDialer();</span></a></TD>
+								<TD style="width: 112px"><a href="#" class="dcontexto"><INPUT TYPE="button" class="BotaoAzul" id="btnIntervaloExt" ONCLICK="method_intervalo_externo()" VALUE="Intervalo Externo"><span>
+para entrar em intervalo externo<br />getElementById("JTalkAtendimento").setIntervaloExterno();</span></a></TD>
+								<TD style="width:20px;"><a href="#" class="dcontexto"><input type="button" class="BotaoAzul" id="btnIntervaloGrupoDialer" style="WIDTH: 122px;" onClick="method_IntervaloGrupoDialer()" value="Int. Grupo/Dialer"><span>
+para entrar em intervalo<br />getElementById("JTalkAtendimento").setEntrarIntervaloGrupoDialer();<br /> para sair de Intervalo <br /> getElementById("JTalkAtendimento").setSairIntervaloGrupoDialer();</span></a></TD>
+								<TD style="width:20px;"><a href="#" class="dcontexto"><input type="button" class="BotaoAzul" id="btnIntervaloDialer" style="WIDTH: 122px;" onClick="method_IntervaloDialer()" value="Int. Dialer"><span>
+para entrar em intervalo<br />getElementById("JTalkAtendimento").setEntrarIntervaloGrupoDialer();<br /> para sair de Intervalo <br /> getElementById("JTalkAtendimento").setSairIntervaloGrupoDialer();</span></a></TD>
+								<TD style="width:20px;"><a href="#" class="dcontexto"><input type="button" class="BotaoAzul" id="btnNDisponivel" style="WIDTH: 122px;" onClick="method_nao_disponivel()" value="N/Disponível"><span>
+para liberar pausa<br />getElementById("JTalkAtendimento").setLiberaPausa();<br /> para colocar em Não Disponível <br /> getElementById("JTalkAtendimento").setNaoDisponivel();</span></a></TD>
+								<TD style="width:20px;"><a href="#" class="dcontexto"><input type="button" class="BotaoAzul" id="btnIntervaloGrupo" style="WIDTH: 122px;" onClick="method_IntervaloGrupo()" value="Intervalo Grupo"><span>
+para entrar em Intervalo de grupo<br />getElementById("JTalkAtendimento").setIntervaloGrupo();</span></a></TD>
+
+								<TD style="width:20px;"><a href="#" class="dcontexto"><input type="button" class="BotaoAzul" id="btnLivre" style="WIDTH: 122px;" onClick="method_livre()" value="Livre"><span>
+para sair de Intervalo <br />getElementById("JTalkAtendimento").setLiberaIntervalo();</span></a></TD>
+
+							</TR>
+						  </TABLE>
+					</TD>
+				</TR>
+
+			</TABLE>
+
+			<TABLE>
+				<TR>
+					<TD>
+					&nbsp;<TABLE id="StatusAtendimento" style="visibility:hidden; border-bottom:1px solid;border-left:1px solid;border-right:1px solid;border-top:1px solid; border-color:#000">
+								<TD class="sLogin" colspan="2">Gravar Ligação</TD>
+								<TD style="width:20px;"><a href="#" class="dcontexto"><input type="button" class="BotaoAzul" id="btnGravar" style="WIDTH: 122px;" onClick="method_gravar_on_ramal()" value="Gravar"><span>
+para gravar<br />getElementById("JTalkAtendimento").setGravarOn();<br /> para Não Gravar<br /> getElementById("JTalkAtendimento").setGravarOff();</span></a></TD>
+								<TD class="sLogin" colspan="2" style="text-align:center">Carregar Ramais</TD>
+								<TD style="width:20px;"><a href="#" class="dcontexto"><input type="button" class="BotaoAzul" id="btnRamais" style="WIDTH: 122px;" onClick="method_Ramais()" value="Ramais Internos"><span>
+para trazer todos ramais<br />getElementById("JTalkAtendimento").setEnviaRamais();</span></a></TD>
+						  </TABLE>
+					</TD>
+				</TR>
+			</TABLE>
+
+
+		<div id="Carregando" style="visibility:hidden">
+Carregando...<img src="progressbar_green.gif" width="126" height="22" alt="Carregando...">
+		</div>
+		<div style="visibility:hidden" id="StatusGeral" >
+			<Div id="lblStatus" class="sStatus">Status</Div>
+			<br/>
+			<table id="TableStatus">
+				<tr>
+					<td style="vertical-align: top; text-align: center;"><TEXTAREA name="txtStatus" id="txtStatus" rows="10" cols="10" STYLE="WIDTH: 500px; margin-top:0; top:0; padding-top:0" ></TEXTAREA></td>
+					<td><TABLE SkinID="GridCentral" id="table_conteudo"></TABLE></td>
+					<td style="width: 300px; vertical-align: top; text-align: center;" ><TABLE SkinID="GridCentral" id="table_grupo"></TABLE></td>
+				</tr>
+
+				<tr>
+					<td><TABLE SkinID="GridCentral" id="table_info"></TABLE></td>
+				</tr>
+			</table>
+		</div>
+
+    <!-- Carrega componentes da Applet -->
+
+    <APPLET id="JTalkAtendimento" height="1" width="1" code="JTalkAtendimento2.class" name="JTalkAtendimento" MAYSCRIPT VIEWASTEXT>
+
+        <PARAM NAME="flg_evt_logon" VALUE="0">
+        <PARAM name="evt_logon" value="logado.html">
+        <PARAM name="codebase_logon" value="http://localhost/atendimento/">
+
+        <PARAM NAME="flg_evt_logoff" VALUE="0">
+
+        <PARAM NAME="flg_evt_disca_ramal" VALUE="0">
+        <PARAM NAME="flg_evt_talk_messager" VALUE="0">
+        <PARAM NAME="flg_evt_informacao_estatistica" VALUE="0">
+        <PARAM NAME="flg_evt_sinalizando_externo" VALUE="0">
+        <PARAM NAME="flg_evt_ring_ura" VALUE="0">
+        <PARAM NAME="flg_evt_agente_livre" VALUE="0">
+        <PARAM NAME="flg_evt_atendeu_externo" VALUE="0">
+        <PARAM NAME="flg_evt_id_ligacao" VALUE="0">
+        <PARAM NAME="flg_evt_chamando_externo" VALUE="0">
+        <PARAM NAME="flg_evt_adiciona_ramal" VALUE="0">
+        <PARAM NAME="flg_evt_senha_invalida" VALUE="0">
+
+        <PARAM NAME="param_codcli" VALUE="devCod">
+        <PARAM NAME="param_telefone" VALUE="tel_Cod">
+        <PARAM NAME="param_telefoneb" VALUE="tel_Numero">
+        <PARAM NAME="param_codcamp" VALUE="filCod">
+
+        <PARAM NAME="target_main" VALUE="main">
+        <PARAM NAME="gera_url_fim_mailing" VALUE="0">
+        <PARAM NAME="ip_server_bd" VALUE="192.168.1.7">
+        <PARAM NAME="user_server_bd" VALUE="sa">
+        <PARAM NAME="pwd_server_bd" VALUE="talk">
+
+        <!--<PARAM name="path_log" value="D:\\AtendimentoNET\\LOG.txt"> -->
+        <!--demo evento informacao estatistica-->
+        <!--implementacoes  nome do arquivo vox-->
+        <!--implementacoes agente livre-->
+        <!--implementacoes id ligacao-->
+        <!--implementacoes param  genérico atendeu ura e atendeu externo-->
+        <!--implementacoes talk  messager-->
+        <!--Adiciona Ramal -->
+      </APPLET>
+
+      </CENTER>
+</form>
+
+</body>
+
+</html>
