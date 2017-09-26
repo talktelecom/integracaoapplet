@@ -3,7 +3,7 @@
 
 
 ### Retorno para Atendeu Externo (mensagem,TelefoneA, TelefoneB)
-#### Atendeu para ligações manuais (click to call, previwer).
+#### Atendeu para ligações manuais (click to call, preview).
 function doAtendeuExterno(msg, telA, telB)
 
 ### Retorno para Atendeu Ramal (mensagem, Telefone)
